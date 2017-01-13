@@ -32,7 +32,7 @@ public class Sonia {
 
                 int sticksNumber = Integer.parseInt(tokens[0]);
                 int take1 = Integer.parseInt(tokens[1]);
-                int take2 = Integer.parseInt(tokens[1]);
+                int take2 = Integer.parseInt(tokens[2]);
                 choices.put(sticksNumber, new Choice(take1, take2));
             }
 
@@ -80,12 +80,11 @@ public class Sonia {
         int stickTaken = entry.getValue();
         Choice choice = choices.get(entry.getKey());
 
-        if (stickTaken == 1)
-            if (choice.take1 > 1)
-                choice.take1--;
-        else
-            if (choice.take2 > 1)
-                choice.take2--;
+        if (stickTaken == 1 && choice.take1 > 1)
+            choice.take1--;
+
+        if (stickTaken == 2 && choice.take2 > 1)
+            choice.take2--;
     }
 
     private void safeStrategy(Map.Entry<Integer, Integer> entry) {
