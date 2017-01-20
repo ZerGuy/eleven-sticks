@@ -1,20 +1,33 @@
-package com.zerguy.elevenSticks.neuralNet;
+package com.zerguy.elevenSticks.game.player.neuralNet;
 
 import com.zerguy.elevenSticks.game.Game;
+import com.zerguy.elevenSticks.game.player.Player;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.util.*;
 
-public class Sonia {
+public class Sonia extends Player {
 
-    public Map<Integer, Choice> choices = new LinkedHashMap<>();
+    private Map<Integer, Choice> choices = new LinkedHashMap<>();
+
+    private static final int LOWER_BOUND = 1;
+    private static final int UPPER_BOUND = 1000;
 
     private Random random = new Random();
     private Map<Integer, Integer> roundChoices = null;
 
+    {
+        name = "Sonia";
+    }
+
     public Sonia() {
         loadChoiceMap();
+    }
+
+    public Sonia(final Map<Integer, Choice> choices, String name) {
+        this.choices = choices;
+        this.name = name;
     }
 
     private void loadChoiceMap() {
@@ -80,10 +93,10 @@ public class Sonia {
         int stickTaken = entry.getValue();
         Choice choice = choices.get(entry.getKey());
 
-        if (stickTaken == 1 && choice.take1 > 1)
+        if (stickTaken == 1 && choice.take1 > LOWER_BOUND)
             choice.take1--;
 
-        if (stickTaken == 2 && choice.take2 > 1)
+        if (stickTaken == 2 && choice.take2 > LOWER_BOUND)
             choice.take2--;
     }
 
@@ -91,9 +104,14 @@ public class Sonia {
         int stickTaken = entry.getValue();
         Choice choice = choices.get(entry.getKey());
 
-        if (stickTaken == 1)
+        if (stickTaken == 1 && choice.take1 < UPPER_BOUND)
             choice.take1++;
-        else
+
+        if (stickTaken == 2 && choice.take2 < UPPER_BOUND)
             choice.take2++;
+    }
+
+    public Map<Integer, Choice> getChoices() {
+        return Collections.unmodifiableMap(choices);
     }
 }

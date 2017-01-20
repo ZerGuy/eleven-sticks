@@ -1,4 +1,4 @@
-package com.zerguy.elevenSticks.neuralNet;
+package com.zerguy.elevenSticks.game.player.neuralNet;
 
 public class Choice {
     public int take1;

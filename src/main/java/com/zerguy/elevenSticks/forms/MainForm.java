@@ -1,7 +1,7 @@
 package com.zerguy.elevenSticks.forms;
 
 import com.zerguy.elevenSticks.game.Game;
-import com.zerguy.elevenSticks.neuralNet.Choice;
+import com.zerguy.elevenSticks.game.player.neuralNet.Choice;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +52,7 @@ public class MainForm extends JFrame {
     private void initGui() {
         panel.setLayout(new GridLayout(Game.NUMBER_OF_STICKS, 3));
 
-        Map<Integer, com.zerguy.elevenSticks.neuralNet.Choice> choices = game.getSoniasChoices();
+        Map<Integer, com.zerguy.elevenSticks.game.player.neuralNet.Choice> choices = game.getSoniasChoices();
 
         for (int i = rows.length - 1; i >= 0; i--) {
             int sticksNumber = i + 1;
